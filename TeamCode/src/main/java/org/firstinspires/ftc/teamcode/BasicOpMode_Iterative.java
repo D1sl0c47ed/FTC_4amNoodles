@@ -33,6 +33,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 /**
@@ -95,6 +96,7 @@ public class BasicOpMode_Iterative extends OpMode
         runtime.reset();
     }
 
+    private double modifier_driveSpeed = 0.5;
     /*
      * Code to run REPEATEDLY after the driver hits PLAY but before they hit STOP
      */
@@ -104,21 +106,16 @@ public class BasicOpMode_Iterative extends OpMode
         double leftPower;
         double rightPower;
 
-        // Choose to drive using either Tank Mode, or POV Mode
-        // Comment out the method that's not used.  The default below is POV.
 
-        // POV Mode uses left stick to go forward, and right stick to turn.
-        // - This uses basic math to combine motions and is easier to drive straight.
-        //double turn  =  gamepad1.right_stick_x;
-        //double drive = -gamepad1.left_stick_y;
+        if (!gamepad1.dpad_down && gamepad1.dpad_up) {
+            modifier_driveSpeed = modifier_driveSpeed + 0.1;
+        } else if (gamepad1.dpad_down && !gamepad1.dpad_up) {
+            modifier_driveSpeed = modifier_driveSpeed - 0.1;
+        }
 
-        //leftPower    = Range.clip(drive + turn, -1.0, 1.0) ;
-        //rightPower   = Range.clip(drive - turn, -1.0, 1.0) ;
 
-        // Tank Mode uses one stick to control each wheel.
-        // - This requires no math, but it is hard to drive forward slowly and keep straight.
-         leftPower  = -gamepad1.left_trigger ;
-         rightPower = -gamepad1.right_trigger ;
+        leftPower = (-gamepad1.left_trigger / 2) * modifier_driveSpeed;
+        rightPower = (-gamepad1.right_trigger / 2) * modifier_driveSpeed;
 
         // Send calculated power to wheels
         leftDrive.setPower(leftPower);
