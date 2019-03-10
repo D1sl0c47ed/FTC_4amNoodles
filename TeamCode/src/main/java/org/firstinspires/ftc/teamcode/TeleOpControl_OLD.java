@@ -50,7 +50,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  */
 
 @TeleOp(name="Drive + Slide", group="Linear Opmode")
-public class OpModeControlled extends LinearOpMode {
+public class TeleOpControl_OLD extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();

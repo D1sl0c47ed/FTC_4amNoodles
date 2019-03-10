@@ -10,8 +10,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.RobotLog;
 
 
-@TeleOp(name = "Testing_TeleOpControl")
-public class Testing_TeleOpControl extends OpMode implements Gamepad.GamepadCallback {
+@TeleOp(name = "a_Testing_TeleOpControl")
+public class a_Testing_TeleOpControl extends OpMode implements Gamepad.GamepadCallback {
 
     //Declare Motors
     private DcMotor leftMotor = null;
@@ -77,7 +77,6 @@ public class Testing_TeleOpControl extends OpMode implements Gamepad.GamepadCall
     public void start() {
         TeleOP_runtime.reset();
         modifier_driveSpeed = 0.2;
-
     }
 
     //Run the loop after 'Driver hits PLAY before STOP
